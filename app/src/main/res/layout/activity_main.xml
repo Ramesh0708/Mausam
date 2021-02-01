@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="#D4E5FE"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:text="Mausam Update"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etcity"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:visibility="visible"
+            android:hint="Enter Your City Name"
+            android:textColor="@color/white"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etcountry"
+            android:layout_marginBottom="10dp"
+            android:hint="Enter Your Country Name ( Optional )"
+            android:visibility="visible"
+            android:textColor="@color/white"
+            android:inputType="textPersonName"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnget"
+            android:layout_marginBottom="10dp"
+            android:background="@color/black"
+            android:textColor="@color/white"
+            android:onClick="getwheatherupdate"
+            android:text="Get"
+            android:backgroundTint="@null"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+           >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvResult"/>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
