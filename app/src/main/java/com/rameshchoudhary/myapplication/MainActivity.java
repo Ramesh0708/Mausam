@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
     EditText etCity,etCountry;
     TextView tvresult;
-    private final String url = "http://api.openweathermap.org/data/2.5/weather?q=";
-    private final String appid = "5fb339788660a08abf89f958fc88c8ad";
+    private static final String URL = "http://api.openweathermap.org/data/2.5/weather?";
+    private static final String API_KEY = "";
     DecimalFormat df = new DecimalFormat("#.##");
 
     @Override
@@ -43,19 +43,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void getwheatherupdate(View view) {
 
-        String tempurl = " ";
         String city = etCity.getText().toString().trim();
         String country = etCountry.getText().toString().trim();
-        if (city.equals("")){
-            tempurl = url + "?q" + city + "," + country + "&appid" + appid;
 
-        }else  {
-            tempurl = url + "?q" + city + "&appid" + appid;
+        if (API_KEY.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "Add your OpenWeatherMap API key to MainActivity.API_KEY", Toast.LENGTH_LONG).show();
+            return;
         }
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempurl, new Response.Listener<String>() {
+
+        if (city.equals("")) {
+            Toast.makeText(getApplicationContext(), "Please enter a city name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        String tempUrl = URL + "q=" + city + (country.isEmpty() ? "" : "," + country) + "&appid=" + API_KEY;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-//                Log.d("response",response);
                 String output = "";
                 try {
                     JSONObject jsonresponse = new JSONObject(response);
@@ -76,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
                     String cityname = jsonresponse.getString("name");
                     tvresult.setTextColor(Color.rgb(68,134,199));
                     output += "Current weather of " + cityname + " ( " + countryname + " ) "
-                           + "\n temp: " + df.format(temp) + "°C"
-                           + "\n Feels like: " + df.format(feelsLike) + " °C"
+                            + "\n temp: " + df.format(temp) + "°C"
+                            + "\n Feels like: " + df.format(feelsLike) + " °C"
                             + " \n Humidity: " + humidity + "%"
                             + "\n Description: " + description
                             + "\n Wind Speed:" + wind + "m/s (meters per seconds)"
